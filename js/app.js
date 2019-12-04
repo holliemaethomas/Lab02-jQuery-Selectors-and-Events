@@ -1,9 +1,16 @@
 'use strict';
-
+let hornKeywords = [];
 // Jquery notes
 
 // getter
 let main = $('main');
+
+// setting element content
+
+$('h1').text('The Gallery of Horns');
+
+$('select').attr('id', 'dropBox')
+$('select').append('option')
 
 
 // setting html elements
@@ -11,61 +18,62 @@ main.append(`
 <h1></h1>
 <select></select>
 `)
-
-$.get('./data/page-1.json').then(
-  (data) => {
-    console.log(data);
-
+// This function gets the keywords out of JSON file and appends them to the dropdown as options
+$.get('../data/page-1.json').then(
+  (dataArray) => {
+    dataArray.forEach((horn) => {
+      hornKeywords.push(horn.keyword)
+    })
+    for (var i = 0; i < hornKeywords.length; i++) {
+      $('#dropBox').append($('<option>').text(hornKeywords[i]))
+    }
   });
 
-
-// getter then a setter
-// we can write either css or custom jquery selectors to select things
-//text() is used as a setter
 $('h1').text('The Gallery of Horns');
-// text() is used as a getter
-$('select').attr('id' , 'dropBox')
+$('select').attr('id', 'dropBox')
 
 
-function Dog(name, img, hobbies){
-  this.name = name;
-  this.img = img;
-  this.hobbies = hobbies;
+
+let HornObjects = [];
+function HornObject(image_url, title, description, keyword, horns) {
+  this.image_url = image_url
+  this.title = title
+  this.description = description
+  this.keyword = keyword
+  this.horns = 0
 }
 
-Dog.prototype.renderWithJquery = function(){
-  $('#dogs').append(`
+
+// This function gets the objects a whole from JSON
+let allObjects = [];
+$.get('../data/page-1.json').then(
+  (dataArray) => {
+    dataArray.forEach((horn) => {
+      allObjects.push(horn)
+    })
+    for (var j = 0; j < allObjects.length; j++) {
+      new HornObject(allObjects[j])
+    }
+  });
+console.log(allObjects);
+
+
+
+const showImage = function () {
+
+  allObjects.forEach(
+    $('#display').append(`
     <div>
-      <h2>${this.name}</h2>
-      <img src="${this.img}"></img>
-      <p>${this.hobbies}</p>
+      <h2>${allObjects.title}</h2>
+      <img src="${allObjects.image_url}"></img>
+      <p>${allObjects.description}</p>
+      <p>${allObjects.keyword}</p>
+      <p>${allObjects.horns}</p>
     </div>
-  `);
-};
+  `))
+}
 
-Dog.prototype.renderWithJqueryClone = function(){
-  let clone = $('#dog-template').clone();
 
-  //change the h2, p, and image
-  // find looks in the targeted jquery object
-  clone.find('h2').text(this.name);
-  clone.find('img').attr('src', this.img);
-  clone.find('p').text(this.hobbies);
-  clone.removeAttr('id');
-  console.log(clone);
-
-  $('#dogs').append(clone);
-};
-
-let odie = new Dog('Odie', 'https://vignette.wikia.nocookie.net/garfield/images/a/ac/OdieCharacter.jpg/revision/latest?cb=20161218045212', 'annoying garfield, loving jon');
-
-odie.renderWithJquery();
-// odie.renderWithJqueryClone();
-// odie.renderWithJqueryClone();
-// odie.renderWithJqueryClone();
-// odie.renderWithJqueryClone();
-// odie.renderWithJqueryClone();
-
-// $('#dog-template').hide();
+showImage();
 
 
