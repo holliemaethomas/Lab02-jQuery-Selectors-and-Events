@@ -1,6 +1,7 @@
 'use strict'
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 function SpikedImages(item) {
   this.image_url = item.image_url;
   this.title = item.title;
@@ -54,6 +55,29 @@ $('select').attr('id', 'dropBox')
   $clone.html(cloneTemplate);
 
 <<<<<<< HEAD
+=======
+
+function SpikedImages(item) {
+  this.image_url = item.image_url;
+  this.title = item.title;
+  this.horns = item.horns;
+  this.keyword = item.keyword;
+  this.description = item.description;
+
+  imageTotals.push(this);
+}
+
+const imageTotals =[];
+
+SpikedImages.prototype.renderHornItem = function() {
+  $('main').append('<section class="clone"><section>');
+  let $clone = $('section[class="clone"]');
+  let cloneTemplate = $('#photo-template').html();
+
+  $clone.html(cloneTemplate);
+
+
+>>>>>>> 630c49a539bb07571b05627c7e5799fe093ae0de
   $clone.find('h2').text(this.title);
   $clone.find('p').text(this.description);
   $clone.find('img').attr('src', this.image_url);
@@ -107,6 +131,7 @@ function jsonData() {
       })
     })
 }
+<<<<<<< HEAD
 =======
 // constructor function to assign props of JSON objs
 let HornObjects = [];
@@ -152,6 +177,8 @@ HornObject.prototype.render()
 allObjects.forEach(HornObject => {
   HornObject.renderWithJquery()
 })
+=======
+>>>>>>> 630c49a539bb07571b05627c7e5799fe093ae0de
 
 $(() => {
   jsonData();
