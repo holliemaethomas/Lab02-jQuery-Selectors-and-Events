@@ -73,10 +73,6 @@ function jsonData() {
     })
 }
 
-allObjects.forEach(HornObject => {
-  HornObject.renderWithJquery()
-})
-
 $(() => {
   jsonData();
   filterSpikePics();
