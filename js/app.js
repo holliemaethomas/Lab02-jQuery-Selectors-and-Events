@@ -10,9 +10,9 @@ function SpikedImages(item) {
   imageTotals.push(this);
 }
 
-const imageTotals =[];
+const imageTotals = [];
 
-SpikedImages.prototype.renderHornItem = function() {
+SpikedImages.prototype.renderHornItem = function () {
   $('main').append('<section class="clone"><section>');
   let $clone = $('section[class="clone"]');
   let cloneTemplate = $('#photo-template').html();
@@ -27,8 +27,15 @@ SpikedImages.prototype.renderHornItem = function() {
   $clone.attr('class', this.keyword);
 }
 
+Image.prototype.renderWithHandlerBars = function () {
+  let spikeHtml = $('#photo-template').html();
+  const renderImageWithHandlebars = Handlebars.compile(spikeHtml);
+  const spikeImage = renderImageWithHandlebars(this);
+  $('main').append(hornImage);
+};
 
-SpikedImages.prototype.renderKeyValues = function() {
+
+SpikedImages.prototype.renderKeyValues = function () {
   let filterSelectValues = [];
   // remove all elements except for first one
   $('option').not(':first').remove();
@@ -47,9 +54,9 @@ SpikedImages.prototype.renderKeyValues = function() {
 }
 
 function filterSpikePics() {
-  $('select').on('change', function() {
+  $('select').on('change', function () {
     let passPhrase = $(this).val();
-    if(passPhrase !== 'default') {
+    if (passPhrase !== 'default') {
       $('section').hide();
       $(`section[class = "${passPhrase}"]`).show();
     } else {
@@ -66,7 +73,7 @@ function jsonData() {
       })
     })
     .then(() => {
-      imageTotals.forEach( image =>{
+      imageTotals.forEach(image => {
         image.renderHornItem();
         image.renderKeyValues();
       })
@@ -77,3 +84,4 @@ $(() => {
   jsonData();
   filterSpikePics();
 });
+
