@@ -6,6 +6,27 @@ section {
   }
   
   img {
-    width: 325px;
-    height: 325px;
+    width: 12em;
+    }
+  
+  main {
+    display: flex;
+    flex-flow: row wrap;
+    flex-direction: row;
+    height: 100%;
+  }
+  
+  h2, p {
+    width: 12em;
+    font-family: 'Sulphur Point', sans-serif;
+  }
+  
+  header {
+    text-align: center;
+  }
+  
+  section {
+    border: solid rgb(63, 61, 61) 0.2em;
+    padding: 1em;
+    margin: 7em;
   }
