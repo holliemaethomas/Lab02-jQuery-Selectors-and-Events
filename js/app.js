@@ -1,6 +1,5 @@
 'use strict'
 
-
 function SpikedImages(item) {
   this.image_url = item.image_url;
   this.title = item.title;
@@ -19,7 +18,6 @@ SpikedImages.prototype.renderHornItem = function() {
   let cloneTemplate = $('#photo-template').html();
 
   $clone.html(cloneTemplate);
-
 
   $clone.find('h2').text(this.title);
   $clone.find('p').text(this.description);
@@ -74,6 +72,10 @@ function jsonData() {
       })
     })
 }
+
+allObjects.forEach(HornObject => {
+  HornObject.renderWithJquery()
+})
 
 $(() => {
   jsonData();
