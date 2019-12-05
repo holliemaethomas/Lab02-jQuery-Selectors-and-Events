@@ -31,7 +31,7 @@ Image.prototype.renderWithHandlerBars = function () {
   let spikeHtml = $('#photo-template').html();
   const renderImageWithHandlebars = Handlebars.compile(spikeHtml);
   const spikeImage = renderImageWithHandlebars(this);
-  $('main').append(hornImage);
+  $('main').append(spikeImage);
 };
 
 
