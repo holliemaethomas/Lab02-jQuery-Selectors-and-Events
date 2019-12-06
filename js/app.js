@@ -85,3 +85,15 @@ $(() => {
   filterSpikePics();
 });
 
+
+$('button[id="page-one"]').click(function(){
+  imageTotals.length = 0;
+  $('main').empty();
+  SpikedImages.jsonData('data/page-1.json')
+});
+
+$('button[id="page-two"]').click(function(){
+  imageTotals.length = 0;
+  $('main').empty();
+  SpikedImages.jsonData('data/page-2.json')
+});
