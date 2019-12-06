@@ -1,21 +1,7 @@
 * {
-    box-sizing: border-box;
-    margin: 0 auto;
-  }
-  
-  body, html {
-    height: 100%;
-    margin:0;
-    padding:0;
-    width: 100%;
-  }
+  box-sizing: border-box;
+}
 
-  section {
-    margin: 25px;
-  }
-
-  h1 {
-    font-family: 'Sulphur Point', sans-serif;
-    font-size: 5em;
-    padding: 1em;
-  }
+body {
+  background-color: #66c2a5;
+}
