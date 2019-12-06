@@ -1,87 +1,104 @@
 'use strict'
 
-function SpikedImages(item) {
-  this.image_url = item.image_url;
-  this.title = item.title;
-  this.horns = item.horns;
-  this.keyword = item.keyword;
-  this.description = item.description;
+let imageOneAll = [];
+let imageTwoAll = [];
 
-  imageTotals.push(this);
-}
 
-const imageTotals = [];
+const SpikeImage = function (image_url, title, description, keyword, numberofhorns) {
+  this.image_url = image_url;
+  this.title = title;
+  this.description = description;
+  this.keyword = keyword;
+  this.numberofhorns = numberofhorns;
+};
 
-SpikedImages.prototype.renderHornItem = function () {
-  $('main').append('<section class="clone"><section>');
-  let $clone = $('section[class="clone"]');
-  let cloneTemplate = $('#photo-template').html();
-
-  $clone.html(cloneTemplate);
-
-  $clone.find('h2').text(this.title);
-  $clone.find('p').text(this.description);
-  $clone.find('img').attr('src', this.image_url);
-  $clone.find('img').attr('alt', this.title);
-  $clone.removeClass('clone');
-  $clone.attr('class', this.keyword);
-}
-
-Image.prototype.renderWithHandlerBars = function () {
-  let spikeHtml = $('#photo-template').html();
-  const renderImageWithHandlebars = Handlebars.compile(spikeHtml);
-  const spikeImage = renderImageWithHandlebars(this);
-  $('main').append(spikeImage);
+SpikeImage.prototype.renderWithHandleBars = function () {
+  let hornHtml = $('#horn-template').html();
+  const renderImageWithHandlebars = Handlebars.compile(hornHtml);
+  const hornImage = renderImageWithHandlebars(this);
+  $('main').append(hornImage);
 };
 
 
-SpikedImages.prototype.renderKeyValues = function () {
-  let filterSelectValues = [];
-  // remove all elements except for first one
-  $('option').not(':first').remove();
-  imageTotals.forEach(image => {
-    if (!filterSelectValues.includes(image.keyword)) {
-      filterSelectValues.push(image.keyword);
-    }
-  });
-
-  filterSelectValues.sort();
-
-  filterSelectValues.forEach(keyword => {
-    let altPhrase = `<option value="${keyword}">${keyword}</option>`;
-    $('select').append(altPhrase);
-  });
+const pageOneRend = () => {
+  imageOneAll.forEach(image => {
+    image.renderWithHandleBars();
+  })
 }
 
-function filterSpikePics() {
-  $('select').on('change', function () {
-    let passPhrase = $(this).val();
-    if (passPhrase !== 'default') {
-      $('section').hide();
-      $(`section[class = "${passPhrase}"]`).show();
-    } else {
-      $('section').show();
-    }
-  });
-}
-
-function jsonData() {
-  $.get('./data/page-1.json', 'json')
-    .then(data => {
-      data.forEach(spikedImageObj => {
-        new SpikedImages(spikedImageObj);
-      })
+const pageOneGetAll = () => {
+  $.get('data/page-1.json').then(images => {
+    images.forEach(eachImage => {
+      imageOneAll.push(new SpikeImage(eachImage.image_url, eachImage.title, eachImage.description, eachImage.keyword, eachImage.horns));
     })
-    .then(() => {
-      imageTotals.forEach(image => {
-        image.renderHornItem();
-        image.renderKeyValues();
-      })
-    })
+    pageOneRend();
+  })
 }
 
-$(() => {
-  jsonData();
-  filterSpikePics();
+const pageTwoRender = () => {
+  imageTwoAll.forEach(image => {
+    image.renderWithHandleBars();
+  })
+}
+
+const getAllPageTwoFiles = () => {
+  $.get('data/page-2.json').then(images => {
+    images.forEach(eachImage => {
+      imageTwoAll.push(new SpikeImage(eachImage.image_url, eachImage.title, eachImage.description, eachImage.keyword, eachImage.horns));
+    })
+  })
+}
+
+
+getAllPageTwoFiles();
+pageOneGetAll();
+
+//-------------------------------------
+
+function renderDropDown(attribute) {
+  const uniques = [];
+  let dropdown = $('select');
+  imageOneAll.forEach(image => {
+    let flag = true;
+    uniques.forEach(uniqueImage => {
+      if (uniqueImage === image[attribute]) {
+        flag = false;
+      }
+    })
+    if (flag) {
+      dropdown
+        .append($('<option></option>')
+          .attr('value', image[attribute])
+          .text(image[attribute]));
+      uniques.push(image[attribute]);
+    }
+  })
+}
+
+$('select').on('change', function () {
+  let $selected = $(this).val();
+  $('section').hide();
+  $(`img[data-keyword = ${$selected}]`).parent().show();
+  $(`img[data-horns = ${$selected}]`).parent().show();
 });
 
+$('input[type=radio]').on('change', function () {
+  $('select').empty();
+  let $clicked = $(this).val();
+  //console.log($(this).val())
+  if ($clicked === 'radio-btn1') {
+    renderDropDown('keyword');
+  } else {
+    renderDropDown('numberofhorns');
+  }
+});
+
+$('#page-one').on('click', function () {
+  $('section').hide();
+  pageOneRend();
+})
+
+$('#page-two').on('click', function () {
+  $('section').hide()
+  pageTwoRender();
+})

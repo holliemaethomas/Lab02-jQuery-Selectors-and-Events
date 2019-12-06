@@ -1,32 +1,26 @@
+img {
+  width: 12em;
+}
+
+main {
+  display: flex;
+  flex-flow: row wrap;
+  flex-direction: row;
+  height: 100%;
+}
+
+h2, p {
+  width: 14em;
+  font-family: 'Quicksand', sans-serif;
+  
+}
+
+header {
+  text-align: center;
+}
+
 section {
-    width: 400px;
-    height: 4000px;
-    float: left;
-    margin: 22px;
-  }
-  
-  img {
-    width: 12em;
-    }
-  
-  main {
-    display: flex;
-    flex-flow: row wrap;
-    flex-direction: row;
-    height: 100%;
-  }
-  
-  h2, p {
-    width: 12em;
-    font-family: 'Sulphur Point', sans-serif;
-  }
-  
-  header {
-    text-align: center;
-  }
-  
-  section {
-    border: solid rgb(63, 61, 61) 0.2em;
-    padding: 1em;
-    margin: 7em;
-  }
+  border: solid black 0.3em;
+  padding: 1em;
+  margin: 7em;
+}

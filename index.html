@@ -2,49 +2,50 @@
 <html>
 
 <head>
-  <title>The Gallery of Horns</title>
+  <title>The Gallery of Horns/Spikes</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="css/reset.css" />
   <link rel="stylesheet" type="text/css" href="css/base.css" />
   <link rel="stylesheet" type="text/css" href="css/layouts.css" />
   <link rel="stylesheet" type="text/css" href="css/modules.css" />
   <link href="https://fonts.googleapis.com/css?family=Sulphur+Point&display=swap" rel="stylesheet">
-  <script id="horn-template" type="text/x-handlebars-template"></script>
+  <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
+  
 
-  <section id="{{photo-template}}">
+  <script id="horn-template" type="text/x-handlebars-template">
+    <section id="{{keyword}}">
       <h2>{{title}}</h2>
-      <img src="{{image_url}}" alt="" data-keyword="{{photo-template}}" data-horns="{{horns}}">
+      <img src="{{image_url}}" alt="" data-keyword="{{keyword}}" data-horns="{{horns}}">
       <p>{{description}}</p>
-  </section>
- </head>
+    </section>
+    </script>
+
+</head>
 
 <body>
-
   <header>
-    <h1>The Gallery of Horns 2</h1>
+    <h1>The Gallery of Horns</h1>
     <div id="radio-buttons">
-      <input id="radio-one" type="radio" name="filter" value="radio-one">
+      <input id="radio-btn1" type="radio" name="filter" value="radio-btn1">
       <label>Search by Keyword</label>
-      <input id="radio-two" type="radio" name="filter" value="radio-two">
-      <label>Search by Number of Spikes (Horns)</label>
+      <input id="radio-btn2" type="radio" name="filter" value="radio-btn2">
+      <label>Search by Number of Horns</label>
     </div>
     <select id="dropdown-template">
       <option value="default">Filter by Keyword</option>
     </select>
     <nav>
-      <button id="page-one">First Page</button>
-      <button id="page-two">Second Page</button>
+      <button id="page-one">Page One</button>
+      <button id="page-two">Page Two</button>
     </nav>
   </header>
   <main>
     
   </main>
-  <br>
-  <br>
   <footer>
-    By: Greg and Hollie
+    &copy; Greg and Hollie || 2019 Code Fellows
   </footer>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.4.2/handlebars.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <script type="text/javascript" src="js/app.js"></script>
